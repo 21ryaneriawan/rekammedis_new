@@ -48,8 +48,8 @@ class Modobat extends CI_Model
     function get_obat()
     {
         $data = $this->db->query("
-            SELECT @no:=@no+1 as nomor, o.*, k.nama_kategori as kategori, DATE_FORMAT(o.tanggal_masuk, ('%d %M %Y')) as tanggal_masuk
-            FROM obat o, kategori_obat k , (SELECT @no:= 0) AS nomor 
+            SELECT o.*, k.nama_kategori as kategori, DATE_FORMAT(o.tanggal_masuk, ('%d %M %Y')) as tanggal_masuk
+            FROM obat o, kategori_obat k
             WHERE k.id=o.kategori
             ORDER BY o.id DESC");
         return $data->result_array();

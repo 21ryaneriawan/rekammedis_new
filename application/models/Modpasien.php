@@ -23,7 +23,7 @@ class Modpasien extends CI_Model
 
     function data_pasien()
     {
-        $data = $this->db->query("SELECT *, @no:=@no+1 as nomor, DATE_FORMAT(tanggal_daftar, ('%d %M %Y')) as tanggal_masuk FROM pasien, (SELECT @no:= 0) AS nomor ");
+        $data = $this->db->query("SELECT *, DATE_FORMAT(tanggal_daftar, ('%d %M %Y')) as tanggal_masuk FROM pasien");
         return $data->result_array();
     }
 
@@ -145,7 +145,7 @@ class Modpasien extends CI_Model
 
     function get_riwayat_berobat()
     {
-        $data = $this->db->query("SELECT p.*, r.id, r.diagnosa, r.terapi, DATE_FORMAT(r.tanggal, ('%d %M %Y')) as tanggal FROM pasien p, rekam_medis r, (SELECT @no:= 0) AS nomor WHERE p.no_medis=r.no_medis AND r.status='selesai' ORDER BY r.id DESC");
+        $data = $this->db->query("SELECT p.*, r.id, r.diagnosa, r.terapi, DATE_FORMAT(r.tanggal, ('%d %M %Y')) as tanggal FROM pasien p, rekam_medis r WHERE p.no_medis=r.no_medis AND r.status='selesai' ORDER BY r.id DESC");
         return $data->result_array();
     }
 
@@ -158,7 +158,7 @@ class Modpasien extends CI_Model
 
     function get_riwayat_periksa()
     {
-        $data = $this->db->query("SELECT p.*, r.id, r.status, DATE_FORMAT(r.tanggal, ('%d %M %Y')) as tanggal FROM pasien p, rekam_medis r, (SELECT @no:= 0) AS nomor WHERE p.no_medis=r.no_medis AND r.status='ambil obat' ORDER BY r.id DESC");
+        $data = $this->db->query("SELECT p.*, r.id, r.status, DATE_FORMAT(r.tanggal, ('%d %M %Y')) as tanggal FROM pasien p, rekam_medis r WHERE p.no_medis=r.no_medis AND r.status='ambil obat' ORDER BY r.id DESC");
         return $data->result_array();
     }
 }

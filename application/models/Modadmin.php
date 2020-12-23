@@ -288,7 +288,7 @@ class Modadmin extends CI_Model
     }
     function data_pasien()
     {
-        $data = $this->db->query("SELECT *, @no:=@no+1 as nomor, DATE_FORMAT(tanggal_daftar, ('%d %M %Y')) as tanggal_masuk FROM pasien, (SELECT @no:= 0) AS nomor ");
+        $data = $this->db->query("SELECT *, DATE_FORMAT(tanggal_daftar, ('%d %M %Y')) as tanggal_masuk FROM pasien");
         return $data->result_array();
     }
 
